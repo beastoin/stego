@@ -1,4 +1,5 @@
 # Stego: Sidecar caching
+A powerfull, painless, flexible caching.
 
 ## Prerequisites (2)
   - Varnish https://varnish-cache.org/
@@ -6,9 +7,9 @@
 
 ## Usage
 1. Prepare caching sites
- - Headers rules: mocha.headers.rules
- - Ttls rules: mocha.ttl.rules
- - Vcl: mocha.vcl
+ - Headers rules: `mocha.headers.rules`
+ - Ttls rules: `mocha.ttl.rules`
+ - Vcl: `mocha.vcl`
 
 2. Load caching sites by update cli `varnish.cli`
  - Load vcl `vcl.load vcl-mocha-local /etc/varnish/mocha.vcl`
