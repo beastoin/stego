@@ -1,0 +1,4 @@
+^/v\d+/configs$ -> X-Language
+^/v\d+/categories[^/]*$ -> X-Language,X-City-ID
+^/v\d+/search/eateries/deals[^/]*$ -> X-Language,X-City-ID
+^/v\d+/search/eateries/featured-chains[^/]*$ -> X-Language,X-City-ID

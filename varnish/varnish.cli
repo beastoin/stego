@@ -1,0 +1,5 @@
+vcl.load vcl-mocha-local /etc/varnish/mocha.vcl
+vcl.label label-mocha-local vcl-mocha-local
+
+vcl.load vcl-varnish /etc/varnish/varnish.vcl
+vcl.use vcl-varnish
