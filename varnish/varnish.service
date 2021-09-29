@@ -23,11 +23,10 @@ LimitCORE=infinity
 
 ExecStart=/usr/sbin/varnishd \
 	  -I /etc/varnish/varnish.cli \
-	  -a :6081 \
-	  -a localhost:8444,PROXY \
+	  -a :16081 \
 	  -p feature=+http2 \
 	  -f '' \
-	  -s malloc,256m
+	  -s malloc,1024m
 ExecReload=/usr/sbin/varnishreload
 
 [Install]

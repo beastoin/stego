@@ -11,10 +11,6 @@ sub vcl_recv {
     if (req.http.host == "local.api.loship") {
         return (vcl(label-mocha-local));
     }
-    # varnish admin mocha, local.cache.loship ~ nginx proxy pass
-    if (req.http.host == "local.cache.loship") {
-        return (vcl(label-mocha-local));
-    }
     
     return (synth(404));
 }

@@ -18,7 +18,7 @@ import cfg;
 # Default backend definition. Set this to point to your content server.
 backend mocha-api-local {
     .host = "127.0.0.1";
-    .port = "11000";
+    .port = "11001";
 }
 
 sub vcl_init {
@@ -31,9 +31,13 @@ sub vcl_init {
         lua_load_package_lib=true,
         lua_load_io_lib=true,
         lua_load_os_lib=true);
+
+    # headers rules
     new headers = cfg.rules(
         "file:///etc/varnish/mocha.headers.rules",
         period=300);
+
+    # ttls rules
     new ttls = cfg.rules(
         "file:///etc/varnish/mocha.ttls.rules",
         period=300);
@@ -41,11 +45,12 @@ sub vcl_init {
 
 acl internal {
     "localhost";
+    "172.16.10.112";
 }
 
 sub vcl_recv {
     # varnish settings reload
-    # WARN: intrenal rules may be passed over incase varnish server is the same to reverse proxy server
+    # WARN: internal acl may be passed over incase varnish server is the same to reverse proxy server
     if (client.ip ~ internal && req.method == "PURGE") {
         if (req.url == "/varnish/settings/lSRIII6jn16TcghWv5r6FW0DIua2Obzl/reload") {
                 if (headers.reload()) {
@@ -60,12 +65,6 @@ sub vcl_recv {
                     return (synth(500, "Failed to reload TTLs rules."));
                 }
             }
-    }
-
-    # not cache incase not set rules
-    if (headers.get(req.url) == "") {
-	std.log("MOCHA: not cache" + req.url);
-	return (pass);
     }
 
     # Validate headers
@@ -84,6 +83,11 @@ sub vcl_recv {
     # Only cache GET or HEAD requests. This makes sure the POST requests are always passed.
     if (req.method != "GET" && req.method != "HEAD") {
       return (pass);
+    }
+
+    # not cache incase not set rules
+    if (headers.get(req.url) == "") {
+	return (pass);
     }
 
     # Normalize the query arguments
@@ -144,9 +148,5 @@ sub vcl_hash {
 	get_hash_func.execute();
 	hash_data(get_hash_func.get_result());
 	get_hash_func.free_result();
-    }
-
-    if (headers.get(req.url) == "") {
-	std.log("MOCHA: not hash" + req.url);
     }
 }

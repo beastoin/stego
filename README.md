@@ -17,23 +17,24 @@ A powerfull, painless, flexible caching.
 
 3. Add caching sites to root `varnish.vcl`
  - Host: `local.api.loship`
- - Host admin (Using to reload site configs): `local.cache.loship`
  - Label (From 2.): `label-mocha-local`
 
 4. Run by command from .service
  ```
  <path-to-varnishd> \
-          -I varnish.cli \
-          -a :6081 \
-          -a localhost:8444,PROXY \
+	  -I /etc/varnish/varnish.cli \
+          -a :16081 \
           -p feature=+http2 \
           -f '' \
-          -s malloc,256m
+          -s malloc,1024m
  ```
 
 ## Features
 - Caching target sites by multiple host.
-- Update / Reload routes, ttls.
+- Update / Reload routes, ttls. e.g.
+ ```
+ curl -X PURGE 'https://local.api.loship/varnish/settings/lSRIII6jn16TcghWv5r6FW0DIua2Obzl/reload'
+ ```
 
 ## TODOs
 - Add autogen target sites 
