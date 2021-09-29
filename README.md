@@ -1,7 +1,7 @@
 # Stego: Sidecar caching
 A powerfull, painless, flexible caching.
 
-## Prerequisites (2)
+## Prerequisites
   - Varnish https://varnish-cache.org/
   - libvmod-cfg: https://github.com/carlosabalde/libvmod-cfg
 
