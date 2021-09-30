@@ -113,6 +113,9 @@ sub vcl_backend_response {
 }
 
 sub vcl_deliver {
+    # by pass cors
+    set resp.http.access-control-allow-origin = req.http.Orign;
+
     # need set x-lozi-server-time header
     set resp.http.X-Lozi-Server-Time = std.time2integer(now, 0);
 
