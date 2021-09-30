@@ -31,7 +31,7 @@ A powerfull, painless, flexible caching.
 
 ## Features
 - Caching target sites by multiple host.
-- Update / Reload routes, ttls. e.g.
+- Update / Reload routes, ttls. Please check template `mocha.vcl`. e.g.
  ```
  curl -X PURGE 'https://local.api.loship/varnish/settings/lSRIII6jn16TcghWv5r6FW0DIua2Obzl/reload'
  ```
