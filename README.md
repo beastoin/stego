@@ -2,8 +2,8 @@
 A powerfull, painless, flexible caching.
 
 ## Prerequisites
-  - Varnish https://varnish-cache.org/
-  - libvmod-cfg: https://github.com/carlosabalde/libvmod-cfg
+  - Varnish 6.6.1 or above: https://varnish-cache.org/
+  - libvmod-cfg 6.6-11.0 or above: https://github.com/carlosabalde/libvmod-cfg
 
 ## Usage
 1. Prepare caching sites
